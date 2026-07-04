@@ -4,7 +4,53 @@
   "id": "kisaki-extensions",
   "name": "Kisaki Extensions",
   "description": "Kisaki extension registry for Kisaki Extensions.",
-  "updatedAt": "2026-07-04T05:38:40.054Z",
-  "signingKeys": [],
-  "packages": []
+  "updatedAt": "2026-07-04T07:44:00.683Z",
+  "signingKeys": [
+    {
+      "id": "ed25519-6fb0ec152b8a",
+      "algorithm": "ed25519",
+      "publicKey": "J+zAz+VUhVmlNfgrTt/i12LnIcOtoA1XjyCRQRVNR28="
+    }
+  ],
+  "packages": [
+    {
+      "id": "vnite-importer",
+      "name": "Vnite Importer",
+      "description": {
+        "defaultLocale": "en",
+        "locales": {
+          "en": {
+            "summary": "Import games and user data from Vnite database backups."
+          }
+        }
+      },
+      "categories": ["tool"],
+      "owner": {
+        "name": "ximu3"
+      },
+      "releases": [
+        {
+          "version": "0.0.1",
+          "publishedAt": "2026-07-04T07:34:38.000Z",
+          "engines": {
+            "kisakiExtensionApi": "=0.0.9"
+          },
+          "releasePage": "https://github.com/ximu3/kisaki-extensions/releases/tag/vnite-importer-v0.0.1",
+          "artifacts": [
+            {
+              "target": "any",
+              "url": "https://github.com/ximu3/kisaki-extensions/releases/download/vnite-importer-v0.0.1/vnite-importer-0.0.1.kisx",
+              "size": 9784588,
+              "sha256": "fe607e3825ff7d44573c32ca5ce493e2dada31a09674fadeeff0b6bba7b098f3",
+              "signature": {
+                "keyId": "ed25519-6fb0ec152b8a",
+                "algorithm": "ed25519",
+                "value": "bLR4CfFyCTPeMwJlmcVlxK0OHiUYST6G73YRb3XfjXmDvBhIIE8rqS3xdK+8Yv0QoTqiWjaGOZ0rd7h7kO2UAQ=="
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
