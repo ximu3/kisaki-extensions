@@ -4,7 +4,7 @@
   "id": "kisaki-extensions",
   "name": "Kisaki Extensions",
   "description": "Kisaki extension registry for Kisaki Extensions.",
-  "updatedAt": "2026-07-04T07:44:00.683Z",
+  "updatedAt": "2026-07-04T09:22:15.603Z",
   "signingKeys": [
     {
       "id": "ed25519-6fb0ec152b8a",
@@ -29,6 +29,44 @@
         "name": "ximu3"
       },
       "releases": [
+        {
+          "version": "0.0.2",
+          "publishedAt": "2026-07-04T09:19:58.000Z",
+          "engines": {
+            "kisakiExtensionApi": "=0.0.10"
+          },
+          "releasePage": "https://github.com/ximu3/kisaki-extensions/releases/tag/vnite-importer-v0.0.2",
+          "changelog": {
+            "defaultLocale": "en",
+            "locales": {
+              "en": {
+                "summary": "Updated Kisaki Extension API compatibility.",
+                "body": "## Changes\n\n- Updated the compatible Kisaki Extension API version to 0.0.10.\n- Synced Kisaki extension build dependencies to 0.0.10."
+              },
+              "ja": {
+                "summary": "Kisaki Extension API 互換バージョンを更新しました。",
+                "body": "## 変更\n\n- 対応する Kisaki Extension API バージョンを 0.0.10 に更新しました。\n- Kisaki 拡張機能のビルド関連依存関係を 0.0.10 に同期しました。"
+              },
+              "zh-Hans": {
+                "summary": "更新 Kisaki Extension API 兼容版本。",
+                "body": "## 变更\n\n- 将扩展兼容的 Kisaki Extension API 更新至 0.0.10。\n- 同步更新构建相关的 Kisaki 扩展依赖至 0.0.10。"
+              }
+            }
+          },
+          "artifacts": [
+            {
+              "target": "any",
+              "url": "https://github.com/ximu3/kisaki-extensions/releases/download/vnite-importer-v0.0.2/vnite-importer-0.0.2.kisx",
+              "size": 9784582,
+              "sha256": "c5155c7177354fb1f4d3cd4ab980a4de04428480449ac29055d4555f3586e9d8",
+              "signature": {
+                "keyId": "ed25519-6fb0ec152b8a",
+                "algorithm": "ed25519",
+                "value": "AnonYZD8JcPNoe5U2qp/fJJK59uC8YEM4ySJjSvfyViaqdAIcSILtmfcz4rsUS3WdqVneUUdP8NL9BRhzT1GAg=="
+              }
+            }
+          ]
+        },
         {
           "version": "0.0.1",
           "publishedAt": "2026-07-04T07:34:38.000Z",
