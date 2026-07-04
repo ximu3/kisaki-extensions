@@ -2,13 +2,13 @@
   "$schema": "./node_modules/@kisaki3/extension-api/schemas/extension-manifest.schema.json",
   "id": "vnite-importer",
   "name": "Vnite Importer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "categories": ["tool"],
   "entry": "./dist/index.mjs",
   "description": "Import games and user data from Vnite database backups.",
   "author": "ximu3",
   "engines": {
-    "kisakiExtensionApi": "=0.0.9"
+    "kisakiExtensionApi": "=0.0.10"
   },
   "ui": "./dist/ui"
 }
