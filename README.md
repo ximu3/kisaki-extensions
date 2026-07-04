@@ -95,7 +95,7 @@ git pull --rebase
 Registry URL:
 
 ```text
-https://raw.githubusercontent.com/<owner>/<repo>/main/registry/manifest.json
+https://raw.githubusercontent.com/ximu3/kisaki-extensions/main/registry/manifest.json
 ```
 
 Generate the repository signing key from the workspace root:
