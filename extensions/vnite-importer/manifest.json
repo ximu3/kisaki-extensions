@@ -8,7 +8,7 @@
   "description": "Import games and user data from Vnite database backups.",
   "author": "ximu3",
   "engines": {
-    "kisaki": "=0.0.7"
+    "kisakiExtensionApi": "=0.0.9"
   },
   "ui": "./dist/ui"
 }

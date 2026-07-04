@@ -12,8 +12,11 @@ importers:
         specifier: ^9.39.2
         version: 9.39.4
       '@kisaki3/extension-cli':
-        specifier: ^0.0.7
-        version: 0.0.7(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.22.5)(typescript@5.9.3)
+        specifier: ^0.0.9
+        version: 0.0.9(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.22.5)(typescript@5.9.3)
+      '@kisaki3/extension-registry':
+        specifier: ^0.0.9
+        version: 0.0.9
       '@types/node':
         specifier: ^24.0.0
         version: 24.13.2
@@ -64,17 +67,17 @@ importers:
         specifier: ^1.2.1
         version: 1.2.3(tailwindcss@4.3.2)
       '@kisaki3/extension-api':
-        specifier: ^0.0.7
-        version: 0.0.7
+        specifier: ^0.0.9
+        version: 0.0.9
       '@kisaki3/extension-cli':
-        specifier: ^0.0.7
-        version: 0.0.7(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.22.5)(typescript@5.9.3)
+        specifier: ^0.0.9
+        version: 0.0.9(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.22.5)(typescript@5.9.3)
       '@kisaki3/extension-sdk':
-        specifier: ^0.0.7
-        version: 0.0.7
+        specifier: ^0.0.9
+        version: 0.0.9
       '@kisaki3/extension-ui-vue':
-        specifier: ^0.0.7
-        version: 0.0.7(vue@3.5.39(typescript@5.9.3))
+        specifier: ^0.0.9
+        version: 0.0.9(vue@3.5.39(typescript@5.9.3))
       '@tailwindcss/vite':
         specifier: ^4.1.17
         version: 4.3.2(vite@7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.22.5))
@@ -418,27 +421,27 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@kisaki3/extension-api@0.0.7':
-    resolution: {integrity: sha512-QjQNZYs3TnyEDYTtvymVMIKGG1drwOFc5KWFUMQ4iUee0EjeI8AJFeis1htfmTlfJB3BxwPL4mdpaiKZyQ48Lw==}
+  '@kisaki3/extension-api@0.0.9':
+    resolution: {integrity: sha512-sjnU9pXn9WrG+Qz3LMYyM//NbT/YhAwnOVazhb9VhXNXzQFi6LqxoKaE4L7PNvpVNVpfbNW4il7BGLVh0VCUfg==}
     engines: {node: '>=24.0.0'}
 
-  '@kisaki3/extension-cli@0.0.7':
-    resolution: {integrity: sha512-3NprbzXjdA/vgmOZ6F5CmnwofEqcViykpWhnME/zod08oRGaeLWbQucEYps8tVbsRckiUxtzLBbhi3op/eLkBg==}
+  '@kisaki3/extension-cli@0.0.9':
+    resolution: {integrity: sha512-GvI3v/smwGYa4xd5sfIIj56hfWZZ5IW+oMm+DBJRPUU0T6nGbcr5+Dq6oWd9QlYhlzok50J2SnfJxXiqOmxv4Q==}
     engines: {node: '>=24.0.0'}
     hasBin: true
     peerDependencies:
       typescript: '>=5.0.0'
 
-  '@kisaki3/extension-registry@0.0.7':
-    resolution: {integrity: sha512-f4eAmhKiz9j6XB5VVlEmn/ydDSB8EWHnLqmMg12Wr702BMBfKy7DsK3CLgIU/PWtt8kxfrl/ulm6h/VPVILsQg==}
+  '@kisaki3/extension-registry@0.0.9':
+    resolution: {integrity: sha512-a5OZRxVR999+8d4nhsHFe+GuTnzira7vEQFx0PES3ez+pUru6ZUNmVwFGacCtT+TRjDMixeBsjzJdcVp4rCR1w==}
     engines: {node: '>=24.0.0'}
 
-  '@kisaki3/extension-sdk@0.0.7':
-    resolution: {integrity: sha512-p+0KZYBpP0mIWQbrliZtVgsrI8llCafdLj1f+ZOSzlfjzoMTmNmL/Cz7uqerVw4Eos9tRwif9yVd3zv8TgHFgw==}
+  '@kisaki3/extension-sdk@0.0.9':
+    resolution: {integrity: sha512-0hnlAzUgK31HjgYIf2Nh7DzRggFPi2WHF5m8TwWwVfoK9xvjQjDj5FBK5u6lIyXAPiLRGGDxisxg+PrwGLJa3g==}
     engines: {node: '>=24.0.0'}
 
-  '@kisaki3/extension-ui-vue@0.0.7':
-    resolution: {integrity: sha512-rdxa8aNFNuV2kKsV0KVzIn12Jtpb9EMeWXqKh1Cw6jptvJxArtst6uCLdUiwhZpyukU5KjYKW77d9CkmcMPdGQ==}
+  '@kisaki3/extension-ui-vue@0.0.9':
+    resolution: {integrity: sha512-oYzYsitNbD19W654419WqX/yjq/JqJ3c7jE4biRvPTE50YlwxA34TbDhy+CuIG29v2u4IaQrdKvRGeQ+mLsLMw==}
     engines: {node: '>=24.0.0'}
     peerDependencies:
       vue: ^3.5.0
@@ -2445,14 +2448,14 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@kisaki3/extension-api@0.0.7':
+  '@kisaki3/extension-api@0.0.9':
     dependencies:
       semver: 7.8.5
 
-  '@kisaki3/extension-cli@0.0.7(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.22.5)(typescript@5.9.3)':
+  '@kisaki3/extension-cli@0.0.9(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.22.5)(typescript@5.9.3)':
     dependencies:
-      '@kisaki3/extension-api': 0.0.7
-      '@kisaki3/extension-registry': 0.0.7
+      '@kisaki3/extension-api': 0.0.9
+      '@kisaki3/extension-registry': 0.0.9
       adm-zip: 0.5.18
       archiver: 7.0.1
       chokidar: 5.0.0
@@ -2478,16 +2481,16 @@ snapshots:
       - tsx
       - yaml
 
-  '@kisaki3/extension-registry@0.0.7':
+  '@kisaki3/extension-registry@0.0.9':
     dependencies:
-      '@kisaki3/extension-api': 0.0.7
+      '@kisaki3/extension-api': 0.0.9
       semver: 7.8.5
 
-  '@kisaki3/extension-sdk@0.0.7':
+  '@kisaki3/extension-sdk@0.0.9':
     dependencies:
-      '@kisaki3/extension-api': 0.0.7
+      '@kisaki3/extension-api': 0.0.9
 
-  '@kisaki3/extension-ui-vue@0.0.7(vue@3.5.39(typescript@5.9.3))':
+  '@kisaki3/extension-ui-vue@0.0.9(vue@3.5.39(typescript@5.9.3))':
     dependencies:
       '@vueuse/core': 14.3.0(vue@3.5.39(typescript@5.9.3))
       class-variance-authority: 0.7.1
