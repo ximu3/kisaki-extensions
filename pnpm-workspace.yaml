@@ -4,6 +4,7 @@ packages:
 allowBuilds:
   esbuild: true
   lefthook: true
+  leveldown: true
   vue-demi: true
 
 minimumReleaseAgeExclude:

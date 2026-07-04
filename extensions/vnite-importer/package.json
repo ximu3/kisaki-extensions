@@ -29,6 +29,7 @@
     "@kisaki3/extension-ui-vue": "^0.0.7",
     "@tailwindcss/vite": "^4.1.17",
     "@types/node": "^24.0.0",
+    "@types/pouchdb": "6.4.2",
     "@vitejs/plugin-vue": "^6.0.3",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
@@ -47,5 +48,10 @@
     "kisaki",
     "extension"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "extract-zip": "2.0.1",
+    "pouchdb": "9.0.0",
+    "sanitize-filename": "1.6.3"
+  }
 }
