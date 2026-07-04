@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { cpSync, rmSync } from 'node:fs'
-import { readReleaseChangelog } from './changelog'
+import { getReleaseChangelogDirectoryName, readReleaseChangelog } from './changelog'
 import { readCommand, readRequiredEnv, resolveWorkspacePath, run } from './common'
 
 const extensionId = readRequiredEnv('PUBLISH_EXTENSION_ID')
@@ -55,7 +55,7 @@ run('pnpm', ['exec', 'kisx', ...addReleaseArgs])
 run('pnpm', ['exec', 'kisx', 'registry', 'validate', registryManifestPath])
 
 function copyChangelogDirectory(sourceDir: string, parentDir: string): string {
-  const targetDir = path.join(parentDir, 'changelogs', version)
+  const targetDir = path.join(parentDir, 'changelogs', getReleaseChangelogDirectoryName(version))
   rmSync(targetDir, { recursive: true, force: true })
   cpSync(sourceDir, targetDir, { recursive: true })
   return targetDir

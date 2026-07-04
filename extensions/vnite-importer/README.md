@@ -52,12 +52,11 @@ GitHub Release for `vnite-importer-v0.0.1`.
 Optional release changelogs live in this extension directory:
 
 ```text
-extensions/vnite-importer/changelogs/0.0.1/en.md
-extensions/vnite-importer/changelogs/0.0.1/zh-Hans.md
+extensions/vnite-importer/changelogs/v0.0.1/en.md
+extensions/vnite-importer/changelogs/v0.0.1/zh-Hans.md
 ```
 
-The first non-empty line is the changelog summary. The remaining Markdown is
-the changelog body.
+Each changelog can start with optional YAML frontmatter containing `summary`.
 
 If a publish job fails, fix the issue, move the same tag to the corrected
 commit, and push the tag again:

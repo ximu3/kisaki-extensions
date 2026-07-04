@@ -1,5 +1,7 @@
-# Kisaki Extension Tooling v0.0.1
+---
+summary: Initial Vnite Importer release.
+---
 
 ## Features
 
-- Initial release
+- Import games and user data from Vnite database backups.

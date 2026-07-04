@@ -19,12 +19,17 @@ export interface ReleaseChangelog {
 
 const LOCALE_PATTERN = /^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/
 const DEFAULT_LOCALE_CANDIDATES = ['en', 'zh-Hans', 'ja']
+const FRONT_MATTER_DELIMITER = '---'
+
+export function getReleaseChangelogDirectoryName(version: string): string {
+  return `v${version}`
+}
 
 export function readReleaseChangelog(
   extensionDir: string,
   version: string
 ): ReleaseChangelog | null {
-  const directory = path.join(extensionDir, 'changelogs', version)
+  const directory = path.join(extensionDir, 'changelogs', getReleaseChangelogDirectoryName(version))
   if (!existsSync(directory)) {
     return null
   }
@@ -72,34 +77,19 @@ function readLocalizedChangelogDirectory(directory: string): ReleaseChangelog {
 }
 
 function readChangelogMarkdown(filePath: string): LocalizedDocument {
-  const content = readFileSync(filePath, 'utf8').replace(/\r\n/g, '\n').trim()
-  if (!content) {
+  const content = readFileSync(filePath, 'utf8')
+    .replace(/^\uFEFF/, '')
+    .replace(/\r\n/g, '\n')
+  if (!content.trim()) {
     throw new Error(`Changelog file is empty: ${filePath}`)
   }
 
-  const lines = content.split('\n')
-  const summaryIndex = lines.findIndex((line) => line.trim().length > 0)
-  if (summaryIndex < 0) {
-    throw new Error(`Changelog file must start with a summary: ${filePath}`)
-  }
-
-  const summaryLine = lines[summaryIndex]
-  if (summaryLine === undefined) {
-    throw new Error(`Changelog file must start with a summary: ${filePath}`)
-  }
-
-  const summary = normalizeSummary(summaryLine)
-  const body = lines
-    .slice(summaryIndex + 1)
-    .join('\n')
-    .trim()
-  if (!summary) {
-    throw new Error(`Changelog summary is empty: ${filePath}`)
-  }
-
+  const { frontMatter, body } = parseMarkdownFrontMatter(content, filePath)
+  const summary = readFrontMatterSummary(frontMatter, filePath)
+  const normalizedBody = body.trim()
   return {
     summary,
-    ...(body ? { body } : {})
+    ...(normalizedBody ? { body: normalizedBody } : {})
   }
 }
 
@@ -119,11 +109,49 @@ function createReleaseChangelog(
   }
 }
 
-function normalizeSummary(value: string): string {
-  return value
-    .trim()
-    .replace(/^#{1,6}\s+/, '')
-    .trim()
+function parseMarkdownFrontMatter(
+  content: string,
+  filePath: string
+): { frontMatter: string; body: string } {
+  const lines = content.split('\n')
+  if (lines[0]?.trim() !== FRONT_MATTER_DELIMITER) {
+    throw new Error(`Changelog file must start with front matter: ${filePath}`)
+  }
+
+  const endIndex = lines.findIndex(
+    (line, index) => index > 0 && line.trim() === FRONT_MATTER_DELIMITER
+  )
+  if (endIndex < 0) {
+    throw new Error(`Changelog front matter must end with ---: ${filePath}`)
+  }
+
+  return {
+    frontMatter: lines.slice(1, endIndex).join('\n'),
+    body: lines.slice(endIndex + 1).join('\n')
+  }
+}
+
+function readFrontMatterSummary(frontMatter: string, filePath: string): string {
+  const summaryLine = frontMatter.split('\n').find((line) => line.trim().startsWith('summary:'))
+  if (summaryLine === undefined) {
+    throw new Error(`Changelog front matter must declare summary: ${filePath}`)
+  }
+
+  const separatorIndex = summaryLine.indexOf(':')
+  const summary = parseFrontMatterString(summaryLine.slice(separatorIndex + 1))
+  if (!summary) {
+    throw new Error(`Changelog summary is empty: ${filePath}`)
+  }
+  return summary
+}
+
+function parseFrontMatterString(value: string): string {
+  const trimmed = value.trim()
+  const quote = trimmed[0]
+  if ((quote === '"' || quote === "'") && trimmed.endsWith(quote)) {
+    return trimmed.slice(1, -1).trim()
+  }
+  return trimmed
 }
 
 function selectDefaultLocale(locales: readonly string[]): string {
