@@ -1,0 +1,25 @@
+glob_matcher: doublestar
+
+pre-commit:
+  piped: true
+  jobs:
+    - name: format
+      glob:
+        - '*.{ts,tsx,mts,js,mjs,cjs,json,yaml,yml,md,css,vue,html}'
+        - '.*.{ts,tsx,mts,js,mjs,cjs,json,yaml,yml,md,css,vue,html}'
+        - '**/*.{ts,tsx,mts,js,mjs,cjs,json,yaml,yml,md,css,vue,html}'
+      run: pnpm tsx tools/git-hooks/staged.ts format {staged_files}
+      stage_fixed: true
+
+    - name: lint
+      glob:
+        - '*.{ts,tsx,mts,js,mjs,cjs,vue}'
+        - '.*.{ts,tsx,mts,js,mjs,cjs,vue}'
+        - '**/*.{ts,tsx,mts,js,mjs,cjs,vue}'
+      run: pnpm tsx tools/git-hooks/staged.ts lint {staged_files}
+      stage_fixed: true
+
+pre-push:
+  jobs:
+    - name: check
+      run: pnpm check

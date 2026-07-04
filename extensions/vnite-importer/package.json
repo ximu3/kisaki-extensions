@@ -1,0 +1,51 @@
+{
+  "name": "vnite-importer",
+  "private": true,
+  "description": "Import games and user data from Vnite database backups.",
+  "type": "module",
+  "packageManager": "pnpm@11.2.2",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "build": "kisx build",
+    "dev": "kisx dev",
+    "validate": "kisx validate",
+    "pack": "kisx pack",
+    "lint": "eslint .",
+    "lint:fix": "eslint --cache --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit -p tsconfig.host.json --composite false && vue-tsc --noEmit -p tsconfig.ui.json --composite false",
+    "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run build && pnpm run validate"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify/tailwind4": "^1.2.1",
+    "@kisaki3/extension-api": "^0.0.7",
+    "@kisaki3/extension-cli": "^0.0.7",
+    "@kisaki3/extension-sdk": "^0.0.7",
+    "@kisaki3/extension-ui-vue": "^0.0.7",
+    "@tailwindcss/vite": "^4.1.17",
+    "@types/node": "^24.0.0",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-vue": "^10.6.2",
+    "jiti": "^2.6.1",
+    "prettier": "^3.7.4",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.49.0",
+    "vite": "^7.2.6",
+    "vue": "^3.5.26",
+    "vue-eslint-parser": "^10.2.0",
+    "vue-tsc": "^3.2.2"
+  },
+  "keywords": [
+    "kisaki",
+    "extension"
+  ],
+  "license": "MIT"
+}

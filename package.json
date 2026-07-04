@@ -1,0 +1,36 @@
+{
+  "name": "kisaki-extensions",
+  "private": true,
+  "description": "Kisaki extension registry for Kisaki Extensions.",
+  "packageManager": "pnpm@11.2.2",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "pnpm -r --if-present run build",
+    "validate": "pnpm -r --if-present run validate",
+    "typecheck": "tsc --noEmit -p tsconfig.json && pnpm -r --if-present run typecheck",
+    "lint": "eslint --cache . && pnpm -r --if-present run lint",
+    "lint:fix": "eslint --cache --fix . && pnpm -r --if-present run lint:fix",
+    "test": "pnpm -r --if-present run test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "key:generate": "kisx key generate --out .keys/author.ed25519.json",
+    "prepare": "tsx tools/install-hooks.ts",
+    "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run test && pnpm run build && pnpm run validate"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@kisaki3/extension-cli": "^0.0.7",
+    "@types/node": "^24.0.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "jiti": "^2.6.1",
+    "lefthook": "^2.0.12",
+    "prettier": "^3.7.4",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.49.0"
+  }
+}

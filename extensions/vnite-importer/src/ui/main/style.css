@@ -1,0 +1,12 @@
+/*
+ * The webview client mirrors the active Kisaki appearance as --kisaki-*
+ * variables; base.css applies the shared base layer, theme.css maps tokens
+ * onto Tailwind utilities, the UI kit supplies the component layer, and the
+ * iconify plugin renders the kit's icon mask classes. Write your own as
+ * icon-[<set>--<name>]; add more sets with packages like `@iconify-json/lucide`.
+ */
+@import 'tailwindcss';
+@import '@kisaki3/extension-sdk/base.css';
+@import '@kisaki3/extension-sdk/tailwind.css';
+@import '@kisaki3/extension-ui-vue/style.css';
+@plugin "@iconify/tailwind4";

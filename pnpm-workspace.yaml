@@ -1,0 +1,14 @@
+packages:
+  - 'extensions/*'
+
+allowBuilds:
+  esbuild: true
+  lefthook: true
+  vue-demi: true
+
+minimumReleaseAgeExclude:
+  - '@kisaki3/extension-api@0.0.7'
+  - '@kisaki3/extension-cli@0.0.7'
+  - '@kisaki3/extension-registry@0.0.7'
+  - '@kisaki3/extension-sdk@0.0.7'
+  - '@kisaki3/extension-ui-vue@0.0.7'

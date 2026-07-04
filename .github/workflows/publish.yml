@@ -1,0 +1,138 @@
+name: Publish Extension
+
+on:
+  push:
+    tags:
+      - '*-v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Publish tag to build, such as my.extension-v0.0.1.'
+        required: true
+        type: string
+
+concurrency:
+  group: publish-extension-registry-${{ github.repository }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: '24'
+  PNPM_VERSION: '11.2.2'
+
+jobs:
+  detect:
+    name: Read Publish Tag
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      extension_id: ${{ steps.parse.outputs.extension_id }}
+      extension_dir: ${{ steps.parse.outputs.extension_dir }}
+      version: ${{ steps.parse.outputs.version }}
+      tag: ${{ steps.parse.outputs.tag }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck workflow scripts
+        run: pnpm exec tsc --noEmit -p tsconfig.json
+
+      - name: Parse publish tag
+        id: parse
+        env:
+          PUBLISH_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+        run: pnpm exec tsx .github/scripts/publish/detect.ts
+
+  publish:
+    name: Publish Extension
+    needs: detect
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          ref: ${{ needs.detect.outputs.tag }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate publish metadata
+        env:
+          PUBLISH_EXTENSION_ID: ${{ needs.detect.outputs.extension_id }}
+          PUBLISH_EXTENSION_DIR: ${{ needs.detect.outputs.extension_dir }}
+          PUBLISH_VERSION: ${{ needs.detect.outputs.version }}
+          PUBLISH_TAG: ${{ needs.detect.outputs.tag }}
+        run: pnpm exec tsx .github/scripts/publish/verify.ts
+
+      - name: Check extension
+        working-directory: ${{ needs.detect.outputs.extension_dir }}
+        run: pnpm run check
+
+      - name: Package signed extension
+        env:
+          PUBLISH_EXTENSION_DIR: ${{ needs.detect.outputs.extension_dir }}
+          SIGNING_KEY_JSON: ${{ secrets.KISAKI_EXTENSION_SIGNING_KEY }}
+        run: pnpm exec tsx .github/scripts/publish/package.ts
+
+      - name: Resolve package artifacts
+        id: artifact
+        env:
+          PUBLISH_EXTENSION_ID: ${{ needs.detect.outputs.extension_id }}
+          PUBLISH_VERSION: ${{ needs.detect.outputs.version }}
+        run: pnpm exec tsx .github/scripts/publish/artifacts.ts
+
+      - name: Update registry manifest
+        env:
+          PUBLISH_TAG: ${{ needs.detect.outputs.tag }}
+          PUBLISH_EXTENSION_ID: ${{ needs.detect.outputs.extension_id }}
+          PUBLISH_EXTENSION_DIR: ${{ needs.detect.outputs.extension_dir }}
+          PUBLISH_VERSION: ${{ needs.detect.outputs.version }}
+          ARCHIVE_PATH: ${{ steps.artifact.outputs.archive_path }}
+          SIGNATURE_PATH: ${{ steps.artifact.outputs.signature_path }}
+        run: pnpm exec tsx .github/scripts/publish/update-registry.ts
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PUBLISH_TAG: ${{ needs.detect.outputs.tag }}
+          PUBLISH_EXTENSION_ID: ${{ needs.detect.outputs.extension_id }}
+          PUBLISH_EXTENSION_DIR: ${{ needs.detect.outputs.extension_dir }}
+          PUBLISH_VERSION: ${{ needs.detect.outputs.version }}
+          ARCHIVE_PATH: ${{ steps.artifact.outputs.archive_path }}
+          SIGNATURE_PATH: ${{ steps.artifact.outputs.signature_path }}
+        run: pnpm exec tsx .github/scripts/publish/github-release.ts
+
+      - name: Commit registry manifest
+        env:
+          PUBLISH_EXTENSION_ID: ${{ needs.detect.outputs.extension_id }}
+          PUBLISH_VERSION: ${{ needs.detect.outputs.version }}
+        run: pnpm exec tsx .github/scripts/publish/commit-registry.ts
